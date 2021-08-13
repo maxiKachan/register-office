@@ -1,28 +1,18 @@
 package edu.javacourse.register.dao;
 
 import edu.javacourse.register.domain.MarriageCertificate;
-import edu.javacourse.register.view.MarriageRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
-public class MarriageDao {
-    private final Logger LOGGER = LoggerFactory.getLogger(MarriageDao.class);
+@Repository
+public interface MarriageDao extends JpaRepository<MarriageCertificate, Long> {
+    List<MarriageCertificate> findByNum(@Param("number") String number);
+    List<MarriageCertificate> findByNumber(String number);
 
-    private EntityManager entityManager;
-    private String test;
-
-    public MarriageCertificate findMarriageCertificate(MarriageRequest request){
-        LOGGER.info("findMarriageCertificate called:{}", test);
-        return new MarriageCertificate();
-    }
-
-    public void setTest(String test) {
-        this.test = test;
-    }
-
-    public String getTest() {
-        return test;
-    }
+    @Query("SELECT mc FROM MarriageCertificate mc WHERE mc.number = :number")
+    List<MarriageCertificate> findSomething(@Param("number") String number);
 }

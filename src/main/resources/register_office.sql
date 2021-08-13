@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS ro_person;
 CREATE TABLE ro_person
 (
     person_id SERIAL,
-    sex smallint NOT NULL ,
+    sex smallint default 2 NOT NULL ,
     first_name varchar(100) NOT NULL ,
     last_name varchar(100) NOT NULL ,
     patronymic varchar(100)  ,
